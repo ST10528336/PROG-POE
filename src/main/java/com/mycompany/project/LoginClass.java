@@ -52,39 +52,44 @@ public class LoginClass {
          return true;   
         }
         else{
-            System.out.println("username is not correctly formatted please ensure that your username contains an underscore and is no more than five characters");
+            System.out.println("Username is not correctly formatted;please ensure that your username contains an underscore and is no more than five characters in length.");
              return false;      
         }
     }
         //calling another method to ensure that the password contains at least 8 characters ,contain a number,a letter and has a special character
     public boolean checkPassword(String passWord){
-        if (passWord.length()>=8 &&passWord.matches("(?=.*[0-9])(?=.[A-Z]).{8}$")){
-          return true;  
+        if (passWord.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).{8,}$")){
+             return true;
         }  
         else{
-            System.out.println("password incorrectly formatted please ensure that it contain at least 8 characters,a number,a letter and a special character");
-             return false;
-        }
+            System.out.println("Password is not correctly formatted;please ensure that the password contain at least eight characters,a capital letter,a number,and a special character.");
+            return false;
+        }  
     }    
         //calling a method to check if the cellphone number is 10 digit long and consist the international code
     public boolean checkCellPhoneNumber(String cellPhonenumber){
-        if (cellPhonenumber.length()==12 && cellPhonenumber.contains("+27"))
+        if (cellPhonenumber.matches("^\\+27\\d{9}$")) {
             return true;
-        else{
-            System.out.println("cellphone number incorrectly formatted or does not contain the international code");
-             return false;
+        } else {
+            System.out.println("Cell number is incorrectly formatted or does not contain the international code;Please correct the number and try again.");
+            return false;
         }
     }
        //calling a method to register user
     public String registerUser(String userName, String passWord, String cellPhonenumber){
-        if (checkUsername(userName)){
-            return "username is not correctly formatted please ensure that your username contains an underscore and is no more than five characters long in length.";
-       
-         }  
-       
+        if (!checkUsername(userName)){
+            return "Registration failed: Invalid username.";
+        }
+        if(!checkPassword(passWord)){
+            return "Registration failed: Invalid password.";
+        }
+        if(!checkCellPhoneNumber(cellPhonenumber)){
+            return "Registration failed: Invalid cellphone number.";
+        }
         this.userName = userName;
         this.passWord = passWord;
         this.cellPhonenumber = cellPhonenumber;
+        
         return "User successfully registered.";
     }
        //calling a method for login check
