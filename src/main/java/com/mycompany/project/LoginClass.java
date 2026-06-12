@@ -76,21 +76,24 @@ public class LoginClass {
         }
     }
        //calling a method to register user
-    public String registerUser(String userName, String passWord, String cellPhonenumber){
-        if (!checkUsername(userName)){
-            return "Registration failed: Invalid username.";
-        }
-        if(!checkPassword(passWord)){
-            return "Registration failed: Invalid password.";
-        }
-        if(!checkCellPhoneNumber(cellPhonenumber)){
-            return "Registration failed: Invalid cellphone number.";
-        }
-        this.userName = userName;
-        this.passWord = passWord;
-        this.cellPhonenumber = cellPhonenumber;
-        
-        return "User successfully registered.";
+    public String registerUser(String userName,String passWord, String cellPhonenumber){
+    if (!checkUsername(userName)){
+        return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
+    }
+
+    if (!checkPassword(passWord)){
+        return "Password is not correctly formatted; please ensure that the password contains at least eight characters,a capital letter,a number,and a special character.";
+    }
+
+    if (!checkCellPhoneNumber(cellPhonenumber)){
+        return "Cell number is incorrectly formatted or does not contain the international code; please correct the number and try again.";
+    }
+
+    this.userName = userName;
+    this.passWord = passWord;
+    this.cellPhonenumber = cellPhonenumber;
+
+    return "User successfully registered.";
     }
        //calling a method for login check
     public boolean loginUser(String userName , String passWord){

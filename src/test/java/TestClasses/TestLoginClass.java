@@ -49,35 +49,41 @@ public class TestLoginClass {
    }
    @Test
    public void TestLoginSuccessful(){
-       boolean result = log.loginUser("ky1_1", "Ch&&sec@ke99!");
-       assertTrue(result);
+        log.registerUser("ky1_1","Ch&&sec@ke99!", "+27838968976");
+    boolean result =log.loginUser("ky1_1", "Ch&&sec@ke99!");
+    assertTrue(result);
    }
    @Test
    public void TestLoginFailed(){
-       boolean result = log.loginUser("wrongUser", "wrongPass");
-       assertFalse(result);
+     log.registerUser("ky1_1", "Ch&&sec@ke99!","+27838968976");
+    boolean result =
+            log.loginUser( "wrongUser", "wrongPass");
+    assertFalse(result);  
    }
    @Test
    public void TestUsernameSuccessMessage(){
-       String expected = "Welcome user first name, user last name it is great to see you.";
-       String actual = log.registerUser("ky1_1", "Ch&&sec@ke99!", "+27838968976");
-       assertEquals(expected, actual);
-   }
+    log.registerUser("ky1_1","Ch&&sec@ke99!", "+27838968976");
+    boolean success =
+            log.loginUser( "ky1_1", "Ch&&sec@ke99!");
+    String expected = "Welcome :ky1_1it is great to see you again.";
+    String actual = log.returnLoginstatus(success);
+    assertEquals(expected, actual);
+}
    @Test
    public void TestUsernameFailureMessage(){
-       String expected = "Username is not correctly formatted;Please ensure that your username contains an underscore and is no more than five characters in length.";
+       String expected = "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
        String actual = log.registerUser("kyle!!!!!!", "Ch&&sec@ke99!", "+27838968976");
        assertEquals(expected, actual);
    }
    @Test
    public void TestPasswordFailureMessage(){
-       String expected = "Password is not correctly formatted;Please ensure that the password contains at least eight characters,a capital letter,a number,and a special character.";
+       String expected = "Password is not correctly formatted; please ensure that the password contains at least eight characters,a capital letter,a number,and a special character.";
        String actual = log.registerUser("ky1_1","password", "+27838968976");
        assertEquals(expected, actual);
    }
    @Test
    public void TestCellphoneFailureMessage(){
-       String expected = "Cell number is incorrectly formatted or does not contain an international code;please correct the number and try again.";
+       String expected = "Cell number is incorrectly formatted or does not contain the international code; please correct the number and try again.";
        String actual = log.registerUser("ky1_1", "Ch&&sec@ke99!", "08966553");
        assertEquals(expected, actual);
    }
